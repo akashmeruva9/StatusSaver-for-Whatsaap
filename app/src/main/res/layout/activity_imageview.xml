@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".imageview">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/imagetoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background = "@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/imageback"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_baseline_arrow_back_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="start"/>
+
+        <TextView
+            android:id="@+id/namefile"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Image"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/white"
+            style="bold"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/statusimage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:background="@color/black"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagetoolbar"
+        app:layout_constraintBottom_toTopOf="@id/llrd"
+        />
+
+    <LinearLayout
+        android:id="@+id/llrd"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background = "@color/black"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_marginRight="50dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/imageshare"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_baseline_share_24" >
+            </Button>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_marginLeft="50dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/imagedownload"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_baseline_save_alt_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Download"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
