@@ -20,10 +20,14 @@ import androidx.annotation.RequiresApi
 import java.io.IOException
 import android.app.DownloadManager
 import android.view.View
+import org.apache.commons.io.FileUtils
+import java.io.File
 
 
 class videoview : AppCompatActivity() {
 
+
+    var savefilepath = "${Util.RootDirectory}/"
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,11 +54,10 @@ class videoview : AppCompatActivity() {
 
         }
 
-        var uri1 : String = intent.getStringExtra("uri").toString()
-        var file : String = intent.getStringExtra("name").toString()
-        var videoView = findViewById<VideoView>(R.id.statusvideo)
-        val uri: Uri = parse(uri1)
-        videoView.setVideoURI(uri)
+        val uri: String = intent.getStringExtra("uri").toString()
+        val path : String = intent.getStringExtra("path").toString()
+        val videoView = findViewById<VideoView>(R.id.statusvideo)
+        videoView.setVideoURI(parse(uri))
         val rl = findViewById<RelativeLayout>(R.id.rl1)
 
 
@@ -63,8 +66,6 @@ class videoview : AppCompatActivity() {
         videoView.requestFocus()
         videoView.start()
         videoView.setMediaController(mediaController1)
-
-
         mediaController1.visibility = View.VISIBLE
 
         videoback.setOnClickListener {
@@ -72,46 +73,46 @@ class videoview : AppCompatActivity() {
         }
 
 
-            videoshare.setOnClickListener {
+        videoshare.setOnClickListener {
 
-                val share = Intent(Intent.ACTION_SEND)
-                share.type = "video/mp4"
-                share.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri1))
-                startActivity(Intent.createChooser(share, "Share Image"))
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "video/mp4"
+            share.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri))
+            startActivity(Intent.createChooser(share, "Share Image"))
 
-            }
-
-            videodownload.setOnClickListener{
-
-
-                val inputstring = contentResolver.openInputStream(parse(uri1))
-                val filename = "${System.currentTimeMillis()}.mp4"
-                try {
-                    val values = ContentValues()
-                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-                    values.put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4")
-                    values.put(
-                        MediaStore.MediaColumns.RELATIVE_PATH,
-                        Environment.DIRECTORY_DOCUMENTS + "/Videos/"
-                    )
-                    val uri = contentResolver.insert(
-                        MediaStore.Files.getContentUri("external"), values
-                    )
-                    val outputstream = uri?.let {
-                        contentResolver.openOutputStream(it)!!
-                    }
-
-                    if (inputstring != null) {
-                        outputstream?.write(inputstring.readBytes())
-
-                    }
-                    outputstream?.close()
-                    Toast.makeText(applicationContext, "Video Saved", Toast.LENGTH_SHORT).show()
-
-                } catch (e: IOException) {
-                    Toast.makeText(applicationContext, "Download failed", Toast.LENGTH_SHORT).show()
-                }
-            }
         }
+
+        videodownload.setOnClickListener {
+
+            val inputstring = contentResolver.openInputStream(parse(uri))
+            val filename = "${System.currentTimeMillis()}.mp4"
+            try {
+                val values = ContentValues()
+                values.put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                values.put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4")
+                values.put(
+                    MediaStore.MediaColumns.RELATIVE_PATH,
+                    Environment.DIRECTORY_DOWNLOADS + "/StatusSaverVideos/"
+                )
+                val uri = contentResolver.insert(
+                    MediaStore.Files.getContentUri("external"), values
+                )
+                val outputstream = uri?.let {
+                    contentResolver.openOutputStream(it)!!
+                }
+
+                if (inputstring != null) {
+                    outputstream?.write(inputstring.readBytes())
+
+                }
+                outputstream?.close()
+                Toast.makeText(applicationContext, "Video Saved", Toast.LENGTH_SHORT).show()
+
+            } catch (e: IOException) {
+                Toast.makeText(applicationContext, "Download failed", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
 
 }

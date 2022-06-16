@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="All Statuses"
+        android:icon="@drawable/ic_baseline_all_inclusive_24"
+        android:id="@+id/allstatuses"
+        />
+    <item android:title="My Downloads"
+        android:icon="@drawable/ic_baseline_download_for_offline_24"
+        android:id="@+id/mydownloads"
+        />
+</menu>

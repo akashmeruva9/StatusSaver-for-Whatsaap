@@ -11,18 +11,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_imageview.*
+import org.apache.commons.io.FileUtils
 import java.io.*
 
 
 
 class imageview : AppCompatActivity() {
+
+    var savefilepath = "${Util.RootDirectory}/"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imageview)
 
 
-        var uri : String = intent.getStringExtra("uri").toString()
-        var file : String = intent.getStringExtra("name").toString()
+        val uri : String = intent.getStringExtra("uri").toString()
+        val path : String = intent.getStringExtra("path").toString()
+
         var image1 = findViewById<ImageView>(R.id.statusimage)
         Glide.with(this).load(Uri.parse(uri)).into(image1)
 
@@ -52,9 +57,8 @@ class imageview : AppCompatActivity() {
                         val contentValues = ContentValues().apply {
                             put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
                             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                            put(
-                                MediaStore.MediaColumns.RELATIVE_PATH,
-                                Environment.DIRECTORY_PICTURES
+                            put(MediaStore.MediaColumns.RELATIVE_PATH,
+                                Environment.DIRECTORY_PICTURES + "/StatusSaverImages/"
                             )
                         }
 
@@ -77,6 +81,7 @@ class imageview : AppCompatActivity() {
 
                     Toast.makeText(applicationContext, "Image Saved", Toast.LENGTH_LONG).show()
                 }
+
             }
     }
 }
