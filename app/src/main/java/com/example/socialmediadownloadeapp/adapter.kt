@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.util.ArrayList
 
-class statusadapter(private val listener: BlankFragment, private var data: ArrayList<statusdata>)
+class statusadapter(private val listener: MainActivity, private var data: ArrayList<statusdata>)
     : RecyclerView.Adapter<statusviewholder>()
 {
 

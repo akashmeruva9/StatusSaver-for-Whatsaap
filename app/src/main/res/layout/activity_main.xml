@@ -20,27 +20,29 @@
             style="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Whatsaap Status Saver"
+            android:fontFamily="@font/alata"
+            android:text="Whatsapp Status Saver"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="12dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        app:menu="@menu/bottom_nav"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id = "@+id/whatsapprecyclerview1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="5dp"
+        android:background = "@color/white"
         app:layout_constraintTop_toBottomOf="@id/tablayout"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:listitem="@layout/whatsappitem" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
