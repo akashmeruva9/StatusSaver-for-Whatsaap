@@ -22,7 +22,6 @@ import java.io.*
 import java.nio.file.Files
 import java.nio.file.Paths
 
-
 class imageview : AppCompatActivity() {
 
 
@@ -35,7 +34,7 @@ class imageview : AppCompatActivity() {
         val uri : String = intent.getStringExtra("uri").toString()
         val path : String = intent.getStringExtra("path").toString()
 
-        var image1 = findViewById<ImageView>(R.id.statusimage)
+        val image1 = findViewById<ImageView>(R.id.statusimage)
         Glide.with(this).load(Uri.parse(uri)).into(image1)
 
 
